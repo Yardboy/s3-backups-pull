@@ -1,0 +1,29 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - app/assets/**/*
+    - bin/**/*
+    - config/**/*
+    - db/**/*
+    - lib/tasks/auto_annotate_models.rake
+    - log/**/*
+    - spec/**/*
+    - vendor/**/*
+    - Gemfile
+    - Capfile
+    - node_modules/**/*
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Layout/EndOfLine:
+  EnforcedStyle: lf

@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  backups:
+    build:
+      context: ../
+    entrypoint: /app/docker/entrypoint.sh
+    command: bash -c "./backups.rb"
+    container_name: "backups"
+    volumes:
+      - ../:/app
+      - rails6_bundle:/bundle
+    env_file: ../.env
+    environment:
+      BUNDLE_PATH: /bundle
+      BUNDLE_SILENCE_ROOT_WARNING: 1
+
+  rails6_bundle:
+    image: busybox
+    container_name: "rails6_bundle"
+    volumes:
+      - rails6_bundle:/bundle
+
+volumes:
+  rails6_bundle:

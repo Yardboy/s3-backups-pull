@@ -1,0 +1,22 @@
+#!/bin/bash
+
+export COMPOSE_FILE=docker/docker-compose.yml
+SERVICE=backups
+
+case "$1" in
+  bash)
+    docker-compose run --rm $SERVICE /bin/bash
+    ;;
+  build)
+    docker-compose build
+    ;;
+  up)
+    docker-compose up
+    ;;
+  down)
+    docker-compose down
+    ;;
+  enter)
+    docker exec -it `docker ps | grep docker_$SERVICE | cut -f1 -d' '` /bin/bash
+    ;;
+esac
