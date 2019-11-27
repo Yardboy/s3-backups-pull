@@ -9,17 +9,17 @@ services:
     container_name: "backups"
     volumes:
       - ../:/app
-      - rails6_bundle:/bundle
+      - backups_bundle:/bundle
     env_file: ../.env
     environment:
       BUNDLE_PATH: /bundle
       BUNDLE_SILENCE_ROOT_WARNING: 1
 
-  rails6_bundle:
+  backups_bundle:
     image: busybox
-    container_name: "rails6_bundle"
+    container_name: "backups_bundle"
     volumes:
-      - rails6_bundle:/bundle
+      - backups_bundle:/bundle
 
 volumes:
-  rails6_bundle:
+  backups_bundle:
