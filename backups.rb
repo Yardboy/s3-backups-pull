@@ -6,7 +6,7 @@ class Backups
   require 'fileutils'
   require 'aws-sdk-s3'
 
-  CUSTOMERS = %w[tomc roofer].freeze
+  CUSTOMERS = %w[tomc roofer ultramix].freeze
 
   class NoAWSKeysError < StandardError; end
 
