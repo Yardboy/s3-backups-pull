@@ -1,10 +1,8 @@
-FROM ruby:2.6.5
+FROM ruby:2.6.5-alpine
 
 LABEL app-name="backups"
 
-RUN apt-get update -qq && apt-get install -y \
-  curl \
-  vim
+RUN apk update && apk add --no-cache curl vim wget bash
 
 # Create and set the working directory
 ENV APP_HOME /app
