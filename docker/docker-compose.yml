@@ -5,7 +5,7 @@ services:
     build:
       context: ../
     entrypoint: /app/docker/entrypoint.sh
-    command: bash -c "./backups.rb"
+    command: bash -c "bundle exec ./backups.rb"
     container_name: "backups"
     volumes:
       - ../:/app
