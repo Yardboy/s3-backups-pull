@@ -6,7 +6,7 @@ where `dokku mysql:backup` files are being uploaded.
 
 How to use:
 
-* Update `CUSTOMERS` constant in `backups.rb` with customer keys
+* Update `CUSTOMERS` constant in `s3_backups_pull.rb` with customer keys
 
 * Configure a `.env` file for these customer keys according to `.env.example`
 

@@ -1,25 +1,25 @@
 version: "3.7"
 
 services:
-  backups:
+  s3pullbackups:
     build:
       context: ../
-    entrypoint: /app/docker/entrypoint.sh
-    command: bash -c "bundle exec ./backups.rb"
-    container_name: "backups"
+      target: runtime
+      args:
+        APPUID: ${APPUID}
+        APPGID: ${APPGID}
+    command: bash -c "bundle exec ./s3_pull_backups.rb"
+    container_name: "s3pullbackups"
     volumes:
-      - ../:/app
-      - backups_bundle:/bundle
+      - ../:/s3pullbackups
+      - s3pullbackups_bundle:/s3pullbackups/vendor/bundle
     env_file: ../.env
-    environment:
-      BUNDLE_PATH: /bundle
-      BUNDLE_SILENCE_ROOT_WARNING: 1
 
-  backups_bundle:
+  s3pullbackups_bundle:
     image: busybox
-    container_name: "backups_bundle"
+    container_name: "s3pullbackups_bundle"
     volumes:
-      - backups_bundle:/bundle
+      - s3pullbackups_bundle:/s3pullbackups/vendor/bundle
 
 volumes:
-  backups_bundle:
+  s3pullbackups_bundle:

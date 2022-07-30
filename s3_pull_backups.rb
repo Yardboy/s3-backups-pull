@@ -2,11 +2,11 @@
 
 Customer = Struct.new(:key, :bucket, :access_key, :secret_key)
 
-class Backups
+class S3PullBackups
   require 'fileutils'
   require 'aws-sdk-s3'
 
-  CUSTOMERS = %w[tomc ultramix lbk].freeze
+  CUSTOMERS = %w[leaderboardking].freeze
 
   class NoAWSKeysError < StandardError; end
 
@@ -92,7 +92,7 @@ class Backups
   end
 end
 
-Backups.customers.each do |customer|
-  backups = Backups.new(customer)
+S3PullBackups.customers.each do |customer|
+  backups = S3PullBackups.new(customer)
   backups.download_latest
 end
