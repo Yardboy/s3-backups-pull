@@ -1,7 +1,7 @@
 #################################
 # stage: install system         #
 #################################
-FROM ruby:2.6.5-alpine as build
+FROM ruby:3.1.2-alpine as build
 ENV APPNAME s3pullbackups
 
 LABEL app-name=${APPNAME}
