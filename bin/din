@@ -1,7 +1,10 @@
 #!/bin/bash
 
+export APPUID=$(id -u)
+export APPGID=$(id -g) 
+
 export COMPOSE_FILE=docker/docker-compose.yml
-SERVICE=backups
+SERVICE=s3pullbackups
 
 case "$1" in
   bash)
@@ -12,9 +15,6 @@ case "$1" in
     ;;
   up)
     docker-compose up
-    ;;
-  down)
-    docker-compose down
     ;;
   enter)
     docker exec -it `docker ps | grep docker_$SERVICE | cut -f1 -d' '` /bin/bash
