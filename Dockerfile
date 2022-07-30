@@ -53,8 +53,4 @@ COPY --chown=$APPNAME:$APPNAME --from=build $APPHOME $APPHOME
 # As appuser for rest of build
 USER $APPNAME
 
-# Add RAILS_ENV for env dependent tasks
-#ARG RAILS_ENV
-#ENV RAILS_ENV ${RAILS_ENV}
-
 CMD [ "bundle", "exec", "./s3_pullbackups.rb" ]
