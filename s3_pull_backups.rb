@@ -6,7 +6,7 @@ class S3PullBackups
   require 'fileutils'
   require 'aws-sdk-s3'
 
-  CUSTOMERS = %w[leaderboardking].freeze
+  CUSTOMERS = %w[leaderboardking tomc].freeze
 
   class NoAWSKeysError < StandardError; end
 
