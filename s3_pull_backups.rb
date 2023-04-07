@@ -27,18 +27,29 @@ class S3PullBackups
     puts "Looking in bucket #{customer.bucket}"
   end
 
+  def retrieve_and_unzip
+    unzip_latest if download_latest
+  end
+
+  private
+
+  def unzip_latest
+    puts "Unzipping latest file #{latest_backup_file.key}"
+    `gunzip #{backup_path}`
+  end
+
   def download_latest
     ensure_backup_folder
     puts "Downloading latest file #{latest_backup_file.key}"
     begin
       s3_client.get_object(bucket: customer.bucket, key: latest_backup_file.key, response_target: backup_path)
       puts 'Success'
+      true
     rescue StandardError
       puts 'Error downloading file'
+      false
     end
   end
-
-  private
 
   def ensure_backup_folder
     puts 'Ensuring folder exists'
@@ -80,7 +91,7 @@ class S3PullBackups
 
   def configure_customer
     %w[bucket access_key secret_key].each do |fld|
-      customer.send("#{fld}=", ENV["#{customer.key.upcase}_AWS_#{fld.upcase}"])
+      customer.send("#{fld}=", ENV.fetch("#{customer.key.upcase}_AWS_#{fld.upcase}"))
     end
   end
 
@@ -94,5 +105,5 @@ end
 
 S3PullBackups.customers.each do |customer|
   backups = S3PullBackups.new(customer)
-  backups.download_latest
+  backups.retrieve_and_unzip
 end

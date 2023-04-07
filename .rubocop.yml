@@ -1,5 +1,6 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.2
+  NewCops: enable
   Exclude:
     - app/assets/**/*
     - bin/**/*
@@ -11,13 +12,11 @@ AllCops:
     - vendor/**/*
     - Gemfile
     - Capfile
+    - script/**/*
     - node_modules/**/*
 
-Documentation:
+Style/Documentation:
   Enabled: false
-
-Metrics/LineLength:
-  Max: 120
 
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
@@ -25,5 +24,23 @@ Style/FrozenStringLiteralComment:
 Style/AndOr:
   EnforcedStyle: conditionals
 
+Layout/LineLength:
+  Max: 120
+
 Layout/EndOfLine:
   EnforcedStyle: lf
+
+Metrics/ClassLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+
+Metrics/ModuleLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash', 'heredoc']
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/AbcSize:
+  Max: 25
