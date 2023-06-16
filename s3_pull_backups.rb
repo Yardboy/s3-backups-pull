@@ -1,6 +1,6 @@
 #! /usr/local/bin/ruby
 
-Customer = Struct.new(:key, :bucket, :access_key, :secret_key)
+Customer = Struct.new(:key, :bucket, :access_key, :secret_key, :unzip_cmd)
 
 class S3PullBackups
   require 'fileutils'
@@ -35,7 +35,17 @@ class S3PullBackups
 
   def unzip_latest
     puts "Unzipping latest file #{latest_backup_file.key}"
+    send customer.unzip_cmd
+  end
+
+  def gunzip
     `gunzip #{backup_path}`
+  end
+
+  def tarbucket
+    `tar xvfz #{backup_path}`
+    `mv backup/export #{backup_path}.sql`
+    `rm -fr backup`
   end
 
   def download_latest
@@ -90,7 +100,7 @@ class S3PullBackups
   end
 
   def configure_customer
-    %w[bucket access_key secret_key].each do |fld|
+    %w[bucket access_key secret_key unzip_cmd].each do |fld|
       customer.send("#{fld}=", ENV.fetch("#{customer.key.upcase}_AWS_#{fld.upcase}"))
     end
   end
