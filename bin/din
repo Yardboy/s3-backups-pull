@@ -8,13 +8,13 @@ SERVICE=s3pullbackups
 
 case "$1" in
   bash)
-    docker-compose run --rm $SERVICE /bin/bash
+    docker compose run --rm $SERVICE /bin/bash
     ;;
   build)
-    docker-compose build
+    docker compose build
     ;;
   up)
-    docker-compose up
+    docker compose up
     ;;
   enter)
     docker exec -it `docker ps | grep docker_$SERVICE | cut -f1 -d' '` /bin/bash
