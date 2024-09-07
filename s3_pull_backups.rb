@@ -6,7 +6,7 @@ class S3PullBackups
   require 'fileutils'
   require 'aws-sdk-s3'
 
-  CUSTOMERS = %w[leaderboardking tomc].freeze
+  CUSTOMERS = ENV["CUSTOMERS"].split(' ').freeze
 
   class NoAWSKeysError < StandardError; end
 
