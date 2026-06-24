@@ -1,7 +1,7 @@
 #################################
 # stage: install system         #
 #################################
-FROM ruby:3.1.2-alpine as build
+FROM ruby:3.1.2-alpine AS build
 ENV APPNAME s3pullbackups
 
 LABEL app-name=${APPNAME}
@@ -50,7 +50,7 @@ RUN addgroup --system --gid $APPGID $APPNAME \
 # COPY app to container
 COPY --chown=$APPNAME:$APPNAME --from=build $APPHOME $APPHOME
 
-# As appuser for rest of build
+# AS appuser for rest of build
 USER $APPNAME
 
 CMD [ "bundle", "exec", "./s3_pullbackups.rb" ]
